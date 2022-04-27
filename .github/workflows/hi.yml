@@ -25,4 +25,16 @@ jobs:
       - name: View context attributes
         uses: actions/github-script@v6
         with:
-          script: console.log(context)
+          script: console.log(context);
+      - name: View pull request attributes
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const comment = `hello
+            world!`
+            github.reset.issues.createComment({
+                issue_number: context.pull_request.number,
+                owner: 'xg-wang'
+                repo: context.payload.repository.name,
+                body: comment
+            });
